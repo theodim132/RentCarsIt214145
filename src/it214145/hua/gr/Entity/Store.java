@@ -1,22 +1,31 @@
 package it214145.hua.gr.Entity;
 
-import it214145.hua.gr.Entity.Address;
 
 public class Store {
-    private enum type {
-        STORE,
+    public enum  Type {
+        STORE ,
         DELIVERY_POINT
     }
 
 
     private int ID;
     private Address address;
+    private Type type;
 
     public Store(){}
 
-    public Store(int ID,Address address){
+    public Store(int ID,Address address,Type type){
         this.ID = ID;
+        this.type= type;
         this.address = address;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public int getID() {
@@ -33,5 +42,10 @@ public class Store {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return  ID  + " Address = " + address + ", Type = " + type ;
     }
 }

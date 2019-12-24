@@ -4,6 +4,7 @@ package it214145.hua.gr.Entity;
 
 public class Car {
 
+    private int  number;
     private String Name;
     private  String FuelType;
     private  int  TyreSize;
@@ -20,7 +21,8 @@ public class Car {
 
 
 
-    public Car(String Name,String FuelType,int Hp,int TyreSiZe,int CC ,double CostPerHour ,int SeatNumber, int DoorNumber,int PortPackage) {
+    public Car(int number,String Name,String FuelType,int Hp,int TyreSiZe,int CC ,double CostPerHour ,int SeatNumber, int DoorNumber,int PortPackage) {
+        this.number = number;
         this.Name = Name;
         this.FuelType = FuelType;
         this.Hp = Hp;
@@ -30,6 +32,14 @@ public class Car {
         this.SeatNumber = SeatNumber;
         this.DoorNumber = DoorNumber;
         this.PortPackage = PortPackage;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public String getName() {
@@ -84,7 +94,7 @@ public class Car {
         this.CC = CC;
     }
 
-    public void setCostPerHour(float costPerHour) {
+    public void setCostPerHour(double costPerHour) {
         CostPerHour = costPerHour;
     }
 
@@ -108,7 +118,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Name = " + Name + ", FuelType = " + FuelType + ", Hp = " + Hp + ", TyreSiZe = " + TyreSize ;
+        return  number + " Name = " + Name + ", FuelType = " + FuelType + ", Hp = " + Hp + ", TyreSiZe = " + TyreSize ;
     }
 
 

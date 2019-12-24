@@ -10,7 +10,7 @@ public class Booking {
     private Moto moto;
     private Date Pick_Up_Date;
     private Time Pick_Up_Time;
-    private Date Drop_Date;
+    private String Drop_Date;
     private Time Drop_Time;
     private Store store;
     private String ID;
@@ -25,7 +25,7 @@ public class Booking {
     public Booking(){}
 
 
-    public Booking(Car car,Moto moto,Date Pick_Up_Date,Time Pick_Up_Time,Date Drop_Date,Time Drop_Time,Store store,String ID,String D_Licence,int age,long Credit_Number,int Booking_ID,String Payment_Type){
+    public Booking(Car car, Moto moto, Date Pick_Up_Date, Time Pick_Up_Time, String Drop_Date, Time Drop_Time, Store store, String ID, String D_Licence, int age, long Credit_Number, int Booking_ID, String Payment_Type){
         this.car = car;
         this.moto = moto;
         this.Pick_Up_Date = Pick_Up_Date;
@@ -74,11 +74,11 @@ public class Booking {
         Pick_Up_Time = pick_Up_Time;
     }
 
-    public Date getDrop_Date() {
+    public String getDrop_Date() {
         return Drop_Date;
     }
 
-    public void setDrop_Date(Date drop_Date) {
+    public void setDrop_Date(String drop_Date) {
         Drop_Date = drop_Date;
     }
 
@@ -153,4 +153,6 @@ public class Booking {
     public void setPayment_Type(String payment_Type) {
         Payment_Type = payment_Type;
     }
+
+
 }
