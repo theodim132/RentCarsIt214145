@@ -1,26 +1,41 @@
 package it214145.hua.gr.Entity;
 
-import java.util.HashMap;
 
 public class Moto {
 
+    private int Number;
     private String Name;
-    private  String FuelType;
-    private  int  TyreSize;
-    private  int Hp;
-    private  int CC;
-    private  double CostPerHour;
+    private String FuelType;
+    private int TyreSize;
+    private int Hp;
+    private int CC;
+    private double CostPerHour;
 
 
-    public Moto() {}
+    public Moto() {
+    }
 
-    public Moto(String Name, String FuelType,int Hp,int  TyreSize,int CC, double CostPerHour){
+    public Moto(int Number, String Name, String FuelType, int Hp, int TyreSize, int CC, double CostPerHour) {
+        this.Number = Number;
         this.Name = Name;
         this.FuelType = FuelType;
         this.Hp = Hp;
         this.TyreSize = TyreSize;
         this.CC = CC;
         this.CostPerHour = CostPerHour;
+    }
+
+
+    public int getNumber() {
+        return Number;
+    }
+
+    public void setNumber(int number) {
+        Number = number;
+    }
+
+    public void setCostPerHour(double costPerHour) {
+        CostPerHour = costPerHour;
     }
 
     public String getName() {
@@ -74,7 +89,7 @@ public class Moto {
 
     @Override
     public String toString() {
-        return "Name = " + Name + ", FuelType = " + FuelType + ", Hp = " + Hp + ", TyreSiZe = " + TyreSize + "CC = " + CC + "Cost Per Hour = " + CostPerHour ;
+        return Number + " Name = " + Name + ", FuelType = " + FuelType + ", Hp = " + Hp + ", TyreSiZe = " + TyreSize + "CC = " + CC + " Cost Per Hour = " + CostPerHour + "\n";
     }
 
 }

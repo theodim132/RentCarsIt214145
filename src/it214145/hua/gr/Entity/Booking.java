@@ -5,6 +5,11 @@ import java.util.Date;
 
 public class Booking {
 
+    public enum Payment {
+        CASH,
+        CARD
+    }
+
 
     private Car car;
     private Moto moto;
@@ -16,16 +21,17 @@ public class Booking {
     private String ID;
     private String D_Licence;
     private int age;
-    private long Credit_Number;
+    private long Card_Number;
     private int Booking_ID;
     private double Cost;
-    private String Payment_Type;
+    private Payment payment;
 
 
-    public Booking(){}
+    public Booking() {
+    }
 
 
-    public Booking(Car car, Moto moto, Date Pick_Up_Date, Time Pick_Up_Time, String Drop_Date, Time Drop_Time, Store store, String ID, String D_Licence, int age, long Credit_Number, int Booking_ID, String Payment_Type){
+    public Booking(Car car, Moto moto, Date Pick_Up_Date, Time Pick_Up_Time, String Drop_Date, Time Drop_Time, Store store, String ID, String D_Licence, int age, long Card_Number, int Booking_ID, Payment payment) {
         this.car = car;
         this.moto = moto;
         this.Pick_Up_Date = Pick_Up_Date;
@@ -36,9 +42,9 @@ public class Booking {
         this.ID = ID;
         this.D_Licence = D_Licence;
         this.age = age;
-        this.Credit_Number = Credit_Number;
+        this.Card_Number = Card_Number;
         this.Booking_ID = Booking_ID;
-        this.Payment_Type = Payment_Type;
+        this.payment = payment;
     }
 
 
@@ -56,6 +62,10 @@ public class Booking {
 
     public void setMoto(Moto moto) {
         this.moto = moto;
+    }
+
+    public Payment getPayment() {
+        return payment;
     }
 
     public Date getPick_Up_Date() {
@@ -122,12 +132,12 @@ public class Booking {
         this.age = age;
     }
 
-    public long getCredit_Number() {
-        return Credit_Number;
+    public long getCard_Number() {
+        return Card_Number;
     }
 
-    public void setCredit_Number(long credit_Number) {
-        Credit_Number = credit_Number;
+    public void setCard_Number(long card_Number) {
+        Card_Number = card_Number;
     }
 
     public int getBooking_ID() {
@@ -146,13 +156,13 @@ public class Booking {
         Cost = cost;
     }
 
-    public String getPayment_Type() {
-        return Payment_Type;
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
-    public void setPayment_Type(String payment_Type) {
-        Payment_Type = payment_Type;
+    @Override
+    public String toString() {
+        return "Booking ID = " + Booking_ID + ", License ID = " + D_Licence + ", Personal ID = " + ID + " Car = " + car + ", Store = " + store + ", Age = " + age + " Payment Type = " + payment + "\n";
     }
-
 
 }

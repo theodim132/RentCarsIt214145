@@ -1,34 +1,32 @@
 package it214145.hua.gr.Entity;
 
 
-
 public class Car {
 
-    private int  number;
+    private int number;
     private String Name;
-    private  String FuelType;
-    private  int  TyreSize;
-    private  int Hp;
-    private  int CC;
-    private  double CostPerHour;
-    private  int SeatNumber;
-    private  int DoorNumber;
-    private  int PortPackage;
+    private String FuelType;
+    private int TyreSize;
+    private int Hp;
+    private int CC;
+    private double CostPerHour;
+    private int SeatNumber;
+    private int DoorNumber;
+    private int PortPackage;
 
 
     public Car() {
     }
 
 
-
-    public Car(int number,String Name,String FuelType,int Hp,int TyreSiZe,int CC ,double CostPerHour ,int SeatNumber, int DoorNumber,int PortPackage) {
+    public Car(int number, String Name, String FuelType, int Hp, int TyreSiZe, int CC, double CostPerHour, int SeatNumber, int DoorNumber, int PortPackage) {
         this.number = number;
         this.Name = Name;
         this.FuelType = FuelType;
         this.Hp = Hp;
         this.TyreSize = TyreSiZe;
         this.CC = CC;
-        this.CostPerHour=CostPerHour;
+        this.CostPerHour = CostPerHour;
         this.SeatNumber = SeatNumber;
         this.DoorNumber = DoorNumber;
         this.PortPackage = PortPackage;
@@ -58,7 +56,7 @@ public class Car {
         return Hp;
     }
 
-    public int getTyreSize(){
+    public int getTyreSize() {
         return TyreSize;
     }
 
@@ -115,10 +113,9 @@ public class Car {
     }
 
 
-
     @Override
     public String toString() {
-        return  number + " Name = " + Name + ", FuelType = " + FuelType + ", Hp = " + Hp + ", TyreSiZe = " + TyreSize ;
+        return number + " Name = " + Name + ", FuelType = " + FuelType + ", Hp = " + Hp + ", TyreSiZe = " + TyreSize + "\n";
     }
 
 

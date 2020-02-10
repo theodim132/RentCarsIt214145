@@ -38,4 +38,9 @@ public class Address {
     public void setPostCode(int postCode) {
         PostCode = postCode;
     }
+
+    @Override
+    public String toString() {
+        return "Street = " + Street + ", Number = " + No + ", Postal Code = " + PostCode;
+    }
 }

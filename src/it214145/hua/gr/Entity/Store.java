@@ -2,9 +2,9 @@ package it214145.hua.gr.Entity;
 
 
 public class Store {
-    public enum  Type {
-        STORE ,
-        DELIVERY_POINT
+    public enum Type {
+        STORE,
+        PICK_UP_POINT
     }
 
 
@@ -12,11 +12,12 @@ public class Store {
     private Address address;
     private Type type;
 
-    public Store(){}
+    public Store() {
+    }
 
-    public Store(int ID,Address address,Type type){
+    public Store(int ID, Address address, Type type) {
         this.ID = ID;
-        this.type= type;
+        this.type = type;
         this.address = address;
     }
 
@@ -46,6 +47,6 @@ public class Store {
 
     @Override
     public String toString() {
-        return  ID  + " Address = " + address + ", Type = " + type ;
+        return ID + " Address = " + address.toString() + ", Type = " + type + "\n";
     }
 }
