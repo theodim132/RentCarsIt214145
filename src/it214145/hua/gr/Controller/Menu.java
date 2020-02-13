@@ -65,7 +65,7 @@ public class Menu {
                         int booking_id = scanner.nextInt();
                         rent.showReservation(booking_id);
                     } catch (Exception e) {
-                        System.out.println("Wrong id \n");
+                        System.out.println("Something went wrong \n");
                     }
                     break;
                 case 4:

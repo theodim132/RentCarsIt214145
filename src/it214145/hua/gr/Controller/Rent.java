@@ -3,6 +3,9 @@ package it214145.hua.gr.Controller;
 import it214145.hua.gr.Entity.*;
 
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Rent {
@@ -20,6 +23,9 @@ public class Rent {
     private String payment_type;
     private int store_no;
     private long card_number;
+    private String FirstDate;
+    private Date date;
+
 
     public void createStores() {
 
@@ -106,7 +112,7 @@ public class Rent {
     }
 
 
-    public void SelectTransport(String Transp_Type) {
+    public void SelectTransport(String Transp_Type)  {
 
         //Creates new object every time the function is called to prevent duplications
         Booking booking = new Booking();
@@ -115,15 +121,21 @@ public class Rent {
 
         Random random = new Random();
 
+
+        //fill the object with variables
+
         booking.setBooking_ID(random.nextInt(200));
         booking.setID(ID);
         booking.setD_Licence(LiD);
         booking.setStore(stores.get(store_no));
         booking.setAge(age);
+        booking.setPick_Up_Date(date);
 
+        //check if card_number isn't empty
         if (card_number != 0) {
             booking.setPayment(Booking.Payment.CARD);
             booking.setCard_Number(card_number);
+        //if card number is empty then that means the user selected cash payment
         } else {
             booking.setPayment(Booking.Payment.CASH);
         }
@@ -143,6 +155,7 @@ public class Rent {
 
     public void showReservation(int booking_id) {
 
+        //loop through arraylist and show one specific item that matches booking_id
         for (Booking bookings : book) {
 
             if (bookings.getBooking_ID() == booking_id) {
@@ -155,14 +168,18 @@ public class Rent {
 
     public void editReservation(int booking_id) {
 
+        //loop through arraylist and change one specific item one the list
         for (Booking bookings : book) {
 
             //Edit a specific object from the arraylist
             if (bookings.getBooking_ID() == booking_id) {
                 showStores();
                 System.out.println("Select the store number");
+                //if we select the first store then we need to downgrade the number so it can bring us the first item on the list
                 int store_no = scanner.nextInt() - 1;
                 bookings.setStore(stores.get(store_no));
+               //  if (bookings.getPick_Up_Date()
+
                 System.out.println(bookings.toString());
 
                 break;
@@ -171,10 +188,29 @@ public class Rent {
         }
     }
 
-
-    public void scanner() {
+    //Input method
+    public void scanner()  {
         System.out.println("Select the number of the transportation you want to rent");
         number = scanner.nextInt();
+
+
+
+        //change the date format
+        SimpleDateFormat format  = new SimpleDateFormat("MM-dd-yyyy,hh:mm");
+        System.out.println("Example: 12-25-2013,17:30 \n Enter date: ");
+
+        //scan for the date
+        FirstDate = scanner.next();
+
+        try {
+            //parse the date
+            date = format.parse(FirstDate);
+//            format = new SimpleDateFormat("EEE, d MMM yyyy hh mm");
+//          System.out.println("Date: " + format.format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
         System.out.println("Enter your License ID");
         LiD = scanner.next();

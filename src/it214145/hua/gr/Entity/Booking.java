@@ -1,6 +1,7 @@
 package it214145.hua.gr.Entity;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Booking {
@@ -14,9 +15,7 @@ public class Booking {
     private Car car;
     private Moto moto;
     private Date Pick_Up_Date;
-    private Time Pick_Up_Time;
     private String Drop_Date;
-    private Time Drop_Time;
     private Store store;
     private String ID;
     private String D_Licence;
@@ -27,17 +26,16 @@ public class Booking {
     private Payment payment;
 
 
+
     public Booking() {
     }
 
 
-    public Booking(Car car, Moto moto, Date Pick_Up_Date, Time Pick_Up_Time, String Drop_Date, Time Drop_Time, Store store, String ID, String D_Licence, int age, long Card_Number, int Booking_ID, Payment payment) {
+    public Booking(Car car, Moto moto, Date Pick_Up_Date, String Drop_Date, Store store, String ID, String D_Licence, int age, long Card_Number, int Booking_ID, Payment payment) {
         this.car = car;
         this.moto = moto;
         this.Pick_Up_Date = Pick_Up_Date;
-        this.Pick_Up_Time = Pick_Up_Time;
         this.Drop_Date = Drop_Date;
-        this.Drop_Time = Drop_Time;
         this.store = store;
         this.ID = ID;
         this.D_Licence = D_Licence;
@@ -76,13 +74,6 @@ public class Booking {
         Pick_Up_Date = pick_Up_Date;
     }
 
-    public Time getPick_Up_Time() {
-        return Pick_Up_Time;
-    }
-
-    public void setPick_Up_Time(Time pick_Up_Time) {
-        Pick_Up_Time = pick_Up_Time;
-    }
 
     public String getDrop_Date() {
         return Drop_Date;
@@ -92,13 +83,6 @@ public class Booking {
         Drop_Date = drop_Date;
     }
 
-    public Time getDrop_Time() {
-        return Drop_Time;
-    }
-
-    public void setDrop_Time(Time drop_Time) {
-        Drop_Time = drop_Time;
-    }
 
     public Store getStore() {
         return store;
@@ -162,7 +146,7 @@ public class Booking {
 
     @Override
     public String toString() {
-        return "Booking ID = " + Booking_ID + ", License ID = " + D_Licence + ", Personal ID = " + ID + " Car = " + car + ", Store = " + store + ", Age = " + age + " Payment Type = " + payment + "\n";
+        return "Booking ID = " + Booking_ID + ", License ID = " + D_Licence + ", Personal ID = " + ID + " Car = " + car + ", Store = " + store + ", Age = " + age + " Payment Type = " + payment + " Pick Up Date = " + Pick_Up_Date + "\n";
     }
 
 }
