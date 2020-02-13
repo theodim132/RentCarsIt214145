@@ -15,7 +15,7 @@ public class Booking {
     private Car car;
     private Moto moto;
     private Date Pick_Up_Date;
-    private String Drop_Date;
+    private Date Drop_Date;
     private Store store;
     private String ID;
     private String D_Licence;
@@ -31,7 +31,7 @@ public class Booking {
     }
 
 
-    public Booking(Car car, Moto moto, Date Pick_Up_Date, String Drop_Date, Store store, String ID, String D_Licence, int age, long Card_Number, int Booking_ID, Payment payment) {
+    public Booking(Car car, Moto moto, Date Pick_Up_Date, Date Drop_Date, Store store, String ID, String D_Licence, int age, long Card_Number, int Booking_ID, Payment payment) {
         this.car = car;
         this.moto = moto;
         this.Pick_Up_Date = Pick_Up_Date;
@@ -75,11 +75,11 @@ public class Booking {
     }
 
 
-    public String getDrop_Date() {
+    public Date getDrop_Date() {
         return Drop_Date;
     }
 
-    public void setDrop_Date(String drop_Date) {
+    public void setDrop_Date(Date drop_Date) {
         Drop_Date = drop_Date;
     }
 
@@ -146,7 +146,7 @@ public class Booking {
 
     @Override
     public String toString() {
-        return "Booking ID = " + Booking_ID + ", License ID = " + D_Licence + ", Personal ID = " + ID + " Car = " + car + ", Store = " + store + ", Age = " + age + " Payment Type = " + payment + " Pick Up Date = " + Pick_Up_Date + "\n";
+        return "Booking ID = " + Booking_ID + ", License ID = " + D_Licence + ", Personal ID = " + ID + " Car = " + car + ", Store = " + store + ", Age = " + age + " Payment Type = " + payment + ", Pick Up Date = " + Pick_Up_Date + ", Drop Date "+ Drop_Date + "\n";
     }
 
 }

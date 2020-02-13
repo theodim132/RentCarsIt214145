@@ -23,8 +23,13 @@ public class Rent {
     private String payment_type;
     private int store_no;
     private long card_number;
-    private String FirstDate;
-    private Date date;
+    private Date MyDate;
+    private String StringDate;
+    private Date pick_date;
+    private Date drop_date;
+    private int choice;
+    private boolean myboolean;
+    private SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy,hh:mm");
 
 
     public void createStores() {
@@ -33,9 +38,9 @@ public class Rent {
         Address address2 = new Address("Sokratous", 58, 13426);
         Address address3 = new Address("Papadiamantopoulou", 20, 23872);
 
-        Store store1 = new Store(1, address1, Store.Type.STORE);
-        Store store2 = new Store(2, address2, Store.Type.STORE);
-        Store store3 = new Store(3, address3, Store.Type.PICK_UP_POINT);
+        Store store1 = new Store(0, address1, Store.Type.STORE);
+        Store store2 = new Store(1, address2, Store.Type.STORE);
+        Store store3 = new Store(2, address3, Store.Type.PICK_UP_POINT);
 
         stores.add(store1);
         stores.add(store2);
@@ -112,12 +117,12 @@ public class Rent {
     }
 
 
-    public void SelectTransport(String Transp_Type)  {
+    public void SelectTransport(String Transp_Type) {
 
         //Creates new object every time the function is called to prevent duplications
         Booking booking = new Booking();
 
-        scanner();
+        InputMethod();
 
         Random random = new Random();
 
@@ -129,13 +134,14 @@ public class Rent {
         booking.setD_Licence(LiD);
         booking.setStore(stores.get(store_no));
         booking.setAge(age);
-        booking.setPick_Up_Date(date);
+        booking.setPick_Up_Date(pick_date);
+        booking.setDrop_Date(drop_date);
 
         //check if card_number isn't empty
         if (card_number != 0) {
             booking.setPayment(Booking.Payment.CARD);
             booking.setCard_Number(card_number);
-        //if card number is empty then that means the user selected cash payment
+            //if card number is empty then that means the user selected cash payment
         } else {
             booking.setPayment(Booking.Payment.CASH);
         }
@@ -155,7 +161,7 @@ public class Rent {
 
     public void showReservation(int booking_id) {
 
-        //loop through arraylist and show one specific item that matches booking_id
+        //loop through the arraylist and show one specific item that matches booking_id
         for (Booking bookings : book) {
 
             if (bookings.getBooking_ID() == booking_id) {
@@ -168,47 +174,72 @@ public class Rent {
 
     public void editReservation(int booking_id) {
 
-        //loop through arraylist and change one specific item one the list
+        //loop through the arraylist and change one specific item one the list
         for (Booking bookings : book) {
 
             //Edit a specific object from the arraylist
             if (bookings.getBooking_ID() == booking_id) {
-                showStores();
-                System.out.println("Select the store number");
-                //if we select the first store then we need to downgrade the number so it can bring us the first item on the list
-                int store_no = scanner.nextInt() - 1;
-                bookings.setStore(stores.get(store_no));
-               //  if (bookings.getPick_Up_Date()
 
-                System.out.println(bookings.toString());
+                boolean breakpoint = true;
+                while (breakpoint) {
+                    System.out.println("Please choose from these choices");
+                    System.out.println("-------------------------\n");
+                    System.out.println("1 - Change The Store ");
+                    System.out.println("2 - Change The Pick and drop date");
+                    System.out.println("3 - Exit\n");
 
-                break;
+
+                    Scanner scanner = new Scanner(System.in);
+                    try {
+                        choice = scanner.nextInt();
+                    } catch (Exception e) {
+                        System.out.println("Please type something from the given choices \n");
+                    }
+
+                    switch (choice) {
+                        case 1:
+                            showStores();
+                            System.out.println("Select the store number");
+                            int store_no = scanner.nextInt();
+                            bookings.setStore(stores.get(store_no));
+                            System.out.println(bookings.toString());
+                            break;
+                        case 2:
+//                            System.out.println(bookings.getPick_Up_Date().compareTo(bookings.getDrop_Date()));
+//                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//                            Date date = new Date();
+//                            dateFormat.format(date);
+                            break;
+                        case 3:
+                            // Perform "quit" case.
+                            breakpoint = false;
+                            break;
+                        default:
+                            // The user input an unexpected choice.
+
+                    }
+
+
+                }
             }
-
         }
     }
 
     //Input method
-    public void scanner()  {
+    public void InputMethod() {
         System.out.println("Select the number of the transportation you want to rent");
         number = scanner.nextInt();
 
 
+        System.out.println("Enter Pick Up Date");
+        pick_date = scannerDate();
+        System.out.println("Enter Drop Date");
+        drop_date = scannerDate();
 
-        //change the date format
-        SimpleDateFormat format  = new SimpleDateFormat("MM-dd-yyyy,hh:mm");
-        System.out.println("Example: 12-25-2013,17:30 \n Enter date: ");
-
-        //scan for the date
-        FirstDate = scanner.next();
-
-        try {
-            //parse the date
-            date = format.parse(FirstDate);
-//            format = new SimpleDateFormat("EEE, d MMM yyyy hh mm");
-//          System.out.println("Date: " + format.format(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
+        //make sure that the drop take is greater than the pick up date
+        while (drop_date.compareTo(pick_date) < 0 ) {
+            System.out.println("Drop Date can't be before pick up date");
+            drop_date = scannerDate();
         }
 
 
@@ -219,7 +250,17 @@ public class Rent {
         ID = scanner.next();
 
         System.out.println("Enter your age");
-        age = scanner.nextInt();
+        myboolean = true;
+        while(myboolean){
+                age = scanner.nextInt();
+                if(age > 24 && age < 76){
+                    myboolean=false;
+                }else {
+                    System.out.println("Make sure you are typing a number between 25 and 75");
+                }
+
+        }
+
 
         System.out.println("Select payment method  Cash Or Card");
         payment_type = scanner.next();
@@ -234,7 +275,32 @@ public class Rent {
         showStores();
 
         System.out.println("Select the store number");
-        store_no = scanner.nextInt() - 1;
+        store_no = scanner.nextInt() ;
 
     }
+
+    //input for date
+    public Date scannerDate() {
+
+        myboolean = true;
+        //loop through this  until the user enters a date like the example
+        while (myboolean) {
+            System.out.println("Example: 12-25-2013,17:30 \n Enter date: ");
+            StringDate = scanner.next();
+            try {
+                //parse the date
+                //Create date format from string
+                MyDate = format.parse(StringDate);
+                //exit while loop if the date is ok or else it will catches the error
+                myboolean = false;
+            } catch (ParseException e) {
+                //  e.printStackTrace();
+                System.out.println("Please try again");
+                myboolean = true;
+            }
+        }
+        //return the parsed date
+        return MyDate;
+    }
+
 }
