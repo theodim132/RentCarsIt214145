@@ -30,7 +30,7 @@ public class Menu {
             System.out.println("4 - Exit\n");
 
 
-            Scanner scanner = new Scanner(System.in);
+            scanner = new Scanner(System.in);
             try {
                 choice = scanner.nextInt();
             } catch (Exception e) {
@@ -52,6 +52,7 @@ public class Menu {
                 case 2:
                     System.out.println("Please type your booking ID ");
                     try {
+                        //the user enters the booking id in order to edit the reservation
                         int bookin_id = scanner.nextInt();
                         rent.editReservation(bookin_id);
                     } catch (Exception e) {

@@ -6,7 +6,12 @@ import it214145.hua.gr.Entity.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Rent {
 
@@ -29,8 +34,8 @@ public class Rent {
     private Date drop_date;
     private int choice;
     private boolean myboolean;
-    private SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy,hh:mm");
-
+    private SimpleDateFormat format = new SimpleDateFormat("mm-DD-yyyy,hh:mm");
+    private DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("MM-dd-yyyy,hh:mm");
 
     public void createStores() {
 
@@ -91,7 +96,6 @@ public class Rent {
 
 
     public void showStores() {
-
         for (Store store : stores) {
             System.out.println(store.toString());
         }
@@ -121,11 +125,9 @@ public class Rent {
 
         //Creates new object every time the function is called to prevent duplications
         Booking booking = new Booking();
-
-        InputMethod();
-
         Random random = new Random();
 
+        InputMethod();
 
         //fill the object with variables
 
@@ -136,6 +138,10 @@ public class Rent {
         booking.setAge(age);
         booking.setPick_Up_Date(pick_date);
         booking.setDrop_Date(drop_date);
+
+        //difference between the two dates
+        long diff = booking.getDrop_Date().getDate() - booking.getPick_Up_Date().getDate();
+        System.out.println("Days diff " + diff);
 
         //check if card_number isn't empty
         if (card_number != 0) {
@@ -149,10 +155,13 @@ public class Rent {
 
         if (Transp_Type.equalsIgnoreCase("Car")) {
             booking.setCar(cars.get(number));
+            //the diff variable is in days ,so i multiply it with 24 to get the hours .
+            booking.setCost(cars.get(number).getCostPerHour() * (diff * 24));
         } else if (Transp_Type.equalsIgnoreCase("Moto")) {
             booking.setMoto(motos.get((number)));
         }
 
+        //add the object to the arraylist
         book.add(booking);
         System.out.println(booking + "\n");
 
@@ -160,7 +169,6 @@ public class Rent {
     }
 
     public void showReservation(int booking_id) {
-
         //loop through the arraylist and show one specific item that matches booking_id
         for (Booking bookings : book) {
 
@@ -205,10 +213,21 @@ public class Rent {
                             System.out.println(bookings.toString());
                             break;
                         case 2:
-//                            System.out.println(bookings.getPick_Up_Date().compareTo(bookings.getDrop_Date()));
-//                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//                            Date date = new Date();
-//                            dateFormat.format(date);
+                            LocalDateTime now = LocalDateTime.now();
+                            int difference = (bookings.getPick_Up_Date().getDate()) - now.getDayOfMonth();
+
+                            //lathos to get Dat
+                            System.out.println(" difference between pick up date and current " + difference);
+                            if (difference < 1) {
+
+                                System.out.println("mikrotero apo 1 mera");
+
+                            } else if (difference <= 2) {
+                                double penalty = bookings.getCost() - (bookings.getCost() * (30 / 100));
+                                bookings.setCost(penalty);
+                                System.out.println("Penalty = " + penalty);
+                            }
+
                             break;
                         case 3:
                             // Perform "quit" case.
@@ -237,7 +256,7 @@ public class Rent {
         drop_date = scannerDate();
 
         //make sure that the drop take is greater than the pick up date
-        while (drop_date.compareTo(pick_date) < 0 ) {
+        while (drop_date.compareTo(pick_date) < 0) {
             System.out.println("Drop Date can't be before pick up date");
             drop_date = scannerDate();
         }
@@ -251,13 +270,13 @@ public class Rent {
 
         System.out.println("Enter your age");
         myboolean = true;
-        while(myboolean){
-                age = scanner.nextInt();
-                if(age > 24 && age < 76){
-                    myboolean=false;
-                }else {
-                    System.out.println("Make sure you are typing a number between 25 and 75");
-                }
+        while (myboolean) {
+            age = scanner.nextInt();
+            if (age > 24 && age < 76) {
+                myboolean = false;
+            } else {
+                System.out.println("Make sure you are typing a number between 25 and 75");
+            }
 
         }
 
@@ -272,10 +291,11 @@ public class Rent {
             card_number = scanner.nextLong();
         }
 
+
         showStores();
 
         System.out.println("Select the store number");
-        store_no = scanner.nextInt() ;
+        store_no = scanner.nextInt();
 
     }
 

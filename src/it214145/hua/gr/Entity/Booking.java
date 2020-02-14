@@ -146,7 +146,7 @@ public class Booking {
 
     @Override
     public String toString() {
-        return "Booking ID = " + Booking_ID + ", License ID = " + D_Licence + ", Personal ID = " + ID + " Car = " + car + ", Store = " + store + ", Age = " + age + " Payment Type = " + payment + ", Pick Up Date = " + Pick_Up_Date + ", Drop Date "+ Drop_Date + "\n";
+        return "Booking ID = " + Booking_ID + ", License ID = " + D_Licence + ", Personal ID = " + ID + " Car = " + car + ", Store = " + store + ", Age = " + age + " Payment Type = " + payment + ", Pick Up Date = " + Pick_Up_Date + ", Drop Date "+ Drop_Date + ",Total Cost " + Cost +"\n";
     }
 
 }
